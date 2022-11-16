@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#x=$1
+#filename=${x%.bar}
+filename="$(echo "$1" | sed 's/\.[^\/.]*$//')"
+
+case $1 in
+    *.tex|*.md|*.rmd|*.ms|*.me|*.mom|*.pdf)
+        echo Abriendo Documento PDF
+        evince "$filename".pdf 2>/dev/null;;
+    *.html|*.htm)
+        google-chrome "$filename".html 2>/dev/null;;
+    *)
+        echo No se pudo abrir el documento o archivo: "$1";;
+esac
